@@ -12,3 +12,6 @@ playwright-report/
 docs/reference/
 docs/skills/
 docs/local-preview.md
+
+# Agent skills are installed locally from skills-lock.json.
+.agents/

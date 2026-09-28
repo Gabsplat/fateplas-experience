@@ -1,6 +1,8 @@
-# Fateplas
+# Fateplas · Rediseño
 
-Reconstrucción de la landing de WordPress en Next.js App Router, React, TypeScript y Tailwind CSS. Las imágenes y fuentes se sirven desde este proyecto. El respaldo de WordPress se conserva por separado.
+Rediseño de la landing de Fateplas con Next.js App Router, React, TypeScript y Motion. Dirección industrial clara inspirada en Topsoe, conservando la identidad rosa y las mecánicas de la página original. Las imágenes y fuentes se sirven desde este proyecto.
+
+La versión original permanece en https://gabsplat.github.io/fateplas/. Esta variante se publica por separado en https://gabsplat.github.io/fateplas-redesign/.
 
 ## Desarrollo
 
@@ -43,13 +45,13 @@ Para producción usar un servidor Node con almacenamiento persistente y copias d
 
 ## Demo en GitHub Pages
 
-La demo visual está en https://gabsplat.github.io/fateplas/.
+La demo del rediseño está en https://gabsplat.github.io/fateplas-redesign/.
 
 ```sh
-pnpm build:pages
+PAGES_BASE_PATH=/fateplas-redesign pnpm build:pages
 ```
 
-Este comando genera `out/` en una copia de compilación separada. Excluye las rutas API, usa el prefijo `/fateplas` y activa el formulario placeholder. No guarda ni envía consultas; al pulsar el botón informa que el formulario aún no está habilitado. No requiere claves ni servicios externos de correo.
+Este comando genera `out/` en una copia de compilación separada. Excluye las rutas API, usa el prefijo elegido en `PAGES_BASE_PATH` y activa el formulario placeholder. No guarda ni envía consultas; al pulsar el botón informa que el formulario aún no está habilitado. No requiere claves ni servicios externos de correo.
 
 `PAGES_BASE_PATH` permite cambiar el prefijo al construir. El workflow `.github/workflows/pages.yml` publica automáticamente cada push a `main`. GitHub Pages debe estar configurado para GitHub Actions.
 
@@ -64,3 +66,9 @@ La página y su contenido estático usan Server Components. El menú, los carrus
 La foto de las barricas conserva el archivo JPEG original, sin recomprimir, para respetar el detalle de la referencia. El resto de las imágenes de contenido usa la optimización de Next.js. El mapa conserva el iframe de Google Maps del sitio original; su contenido depende de ese servicio externo.
 
 La revisión toma como referencia [Vercel React Best Practices](https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices), [Next.js Best Practices](https://github.com/vercel-labs/openreview/tree/main/.agents/skills/next-best-practices) y la documentación incluida con la versión instalada de Next.js.
+
+## Diseño e interacción
+
+La membrana es un SVG vectorial propio de tres capas. Motion explica la selección del material y suaviza la apertura de acordeones y el cambio de fotografías. Las acciones de teclado responden sin espera y las preferencias de movimiento reducido eliminan desplazamientos. Las fotos y los carruseles tienen controles de pausa.
+
+Las decisiones de diseño y movimiento usan las [skills de Emil Kowalski](https://github.com/emilkowalski/skills) y [frontend-design de Anthropic](https://github.com/anthropics/skills/tree/main/skills/frontend-design), descubiertas con find-skills. Las fuentes instaladas se registran en `skills-lock.json`.
