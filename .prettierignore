@@ -1,0 +1,11 @@
+node_modules
+.next
+.pages-build
+.pages-preview
+out
+next-env.d.ts
+pnpm-lock.yaml
+docs
+public
+data
+test-results

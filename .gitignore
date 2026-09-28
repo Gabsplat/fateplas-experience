@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+.pages-build/
+data/
+.env*
+!.env.example
+*.tsbuildinfo
+test-results/
+playwright-report/
+.pages-preview/
+docs/reference/
+docs/skills/
+docs/local-preview.md

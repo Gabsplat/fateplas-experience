@@ -1,0 +1,265 @@
+{
+  "clients": [
+    {
+      "title": "Mendoza",
+      "columns": [
+        [
+          "Grupo Peñaflor S.A.",
+          "BVA S.A.",
+          "Trivento B&V S.A.",
+          "Lagarde S.A.",
+          "Bodegas y Cavas de Weinert S.A.",
+          "Bodega Cavas del Conde S.A.",
+          "Nieto Senetiner S.A.",
+          "Casa Bianchi S.A.",
+          "RPB S.A.",
+          "Bodega Los Haroldos",
+          "La Rural Viñedos y Bodega S.A.",
+          "Pernod Ricard Argentina S.R.L.",
+          "Bodegas Chandon S.A.",
+          "Bodegas y Viñedos Pascual Toso S.A.",
+          "José Reginato",
+          "55 Malbec S.A.",
+          "Vinsa",
+          "Flecha de los Andes",
+          "Carvit srl",
+          "Bodega Cruz de Piedra S.A.",
+          "Andeluna Cellars S.R.L.",
+          "S.A. Buccolini CIFIA.",
+          "Bodegas y Viñedos Marañon S.A.",
+          "Jean Rivier e Hijos SRL.",
+          "Establecimientos Baudron S.A.",
+          "Bodega Cabrini",
+          "Juan Muñoz",
+          "Sotana Armando",
+          "Viñas de Altura S.A. (Lávaque)",
+          "Bodegas y Viñedos Pincolini S.A."
+        ],
+        [
+          "Bodegas Salentein S.A.",
+          "Finca La Celia S.A.",
+          "Coop. Vitiv. Nueva California Ltda.",
+          "Coop. San Carlos Sud Ltda.",
+          "Coop. Del Norte Lavallino Ltda.",
+          "Coop. Vit. De Mendoza. Ltda.",
+          "Coop. Presidente Quintana Ltda.",
+          "Coop. Vitiv. Ing. Giagnoni Ltda.",
+          "Bodegas Esmeralda S.A.",
+          "Ruca Malen S.A.",
+          "Bodega Santa Gimena",
+          "Bodega Manrique",
+          "Viña Doña Paula S.A.",
+          "Fincas de Agrelo S.A.",
+          "Millan S.A.",
+          "Bodegas Suter S.A.",
+          "Est. Vitivinícolas Escorihuela",
+          "Tittarelli V.O.S.A.",
+          "Caminos del Vino S.A. (Vinea)",
+          "Patritti S.A.",
+          "Uniser S.A.",
+          "Grupo Vit. De Tupungato S.A.",
+          "Compañía Internacional de\nBebidas y Alimentos S.A.",
+          "Waliors S.A.",
+          "Polo Bodegas y Viñedos S.A.",
+          "Cavas Rosell Boher S.A.",
+          "Bodega Leoncio Arizu",
+          "Codorniu Argentina S.A.",
+          "Bodega Los Toneles",
+          "Sophenia S.A.",
+          "Luis Segundo Correas"
+        ],
+        [
+          "Bodega O. Furnier S.A.",
+          "Artel Inc.",
+          "Mastroeni S.A.",
+          "Norton S.A.",
+          "Argento S.A.",
+          "Tierra de Andes S.A.",
+          "Eugenio Ferreira S.A.",
+          "Diamandes S.A.",
+          "Baldini S.A.",
+          "Bodega Zanetti",
+          "Bodega Guerra",
+          "Cerro Correa S.A.",
+          "Bodega Domiciano",
+          "Villafañe y Guzman S.R.L.",
+          "Familia Pose",
+          "Monte Real S.A.",
+          "Bodega Crotta S.A.",
+          "Bodega Vintage S.A.",
+          "Bodega Recoleto S.A.",
+          "Don Cristobal S.A.",
+          "Don Cayetano S.A.",
+          "Monte Viejo S.A.",
+          "Pulenta Estate",
+          "Finca Flichman",
+          "Viñas del Sol S.R.L.",
+          "Dante Robino",
+          "Pincolini S.A.",
+          "Roca S.A.",
+          "Kaikem S.A.",
+          "Jugos Australes S.A.",
+          "El Zorzal S.A."
+        ]
+      ]
+    },
+    {
+      "title": "San Juan",
+      "columns": [
+        [
+          "Pernod Ricard Arg. S.R.L.",
+          "Viñedos Pie de Palo",
+          "Grupo Peñaflor S.A.",
+          "Destilería Internacional S.A.",
+          "San Joaquín SA",
+          "Horacio Nessman S.A.",
+          "Fincas Santa Barbara S.A.",
+          "Fraccionadora San Juan S.A.",
+          "Cepas Andinas S.A."
+        ],
+        [
+          "Bodegas y Viñedos La Ponderosa S.A.",
+          "Bodega Casa Montés",
+          "Morcio y Miglioli S.A.",
+          "Bodegas Yanson",
+          "Jugos y Vinos andinos S.A.",
+          "Bodega Chirino SA",
+          "Bodega Millas Hnos. S.A.",
+          "Finisterra S.A."
+        ],
+        [
+          "Franalco S.A.",
+          "Putruele Hnos S.A.",
+          "Liguer S.A.",
+          "Bodega Vera",
+          "Viñas Argentinas S.A.",
+          "Bodegas Callia S.A.",
+          "Bodega San Juan de la Frontera",
+          "Mo. Biondolillo"
+        ]
+      ]
+    },
+    {
+      "title": "Salta",
+      "columns": [
+        [
+          "El Esteco S.A.",
+          "Pernod Ricard Arg.",
+          "Puesto del Márquez",
+          "San Isidro",
+          "Piattelli"
+        ],
+        [
+          "Félix Lávaque S.A.",
+          "Bodega La Rosa",
+          "Domingo Hnos.",
+          "Hess Family Latin America S.A.",
+          "Vasija Secreta S.A.",
+          "Las Flechas S.R.L."
+        ]
+      ]
+    },
+    {
+      "title": "La Rioja",
+      "columns": [
+        [
+          "Coop. Vitiv. De la Rioja Ltda.",
+          "Sudamericana de Vinos S.A.",
+          "Bodegas San Huberto S.A.",
+          "Tecnicagua S.A.",
+          "Anguinan S.A.",
+          "Fincas Riojanas"
+        ],
+        [
+          "Chańar Muyo",
+          "Celajes S.A.",
+          "Bodega Río Dulce S.A.",
+          "Valle de la Puerta S.A.",
+          "Bodega José González",
+          "Bodega Animana"
+        ]
+      ]
+    },
+    {
+      "title": "Neuquén",
+      "columns": [["Bodega Schroeder", "Bodega Del Fin Del Mundo"]]
+    },
+    {
+      "title": "Uruguay",
+      "columns": [
+        [
+          "Bodega Chiapetta",
+          "Bodega Bruzzone & Scuitto",
+          "Castillo Viejo",
+          "Establecimiento Juanico",
+          "Bodega VUDU"
+        ]
+      ]
+    },
+    {
+      "title": "Buenos Aires",
+      "columns": [["Takeda Parma S.A."]]
+    }
+  ],
+  "faq": [
+    {
+      "title": "¿Qué incluye el servicio?",
+      "paragraphs": [],
+      "list": [
+        "Fabricación personalizada de la membrana para prensa (según marca y modelo cotizado).",
+        "Toma de medidas y despacho gratis en el Gran Mendoza.",
+        "Instrucciones de uso del kit de reparación de membranas."
+      ]
+    },
+    {
+      "title": "¿Qué NO incluye el servicio?",
+      "paragraphs": [],
+      "list": [
+        "Toma de medidas en planta fuera del Gran Mendoza.",
+        "Instalación.",
+        "Reparación de membranas rotas.",
+        "Cualquier otra prestación que no se publique explícitamente como parte del servicio."
+      ]
+    },
+    {
+      "title": "¿El servicio de relevamiento para membranas a medida tiene un costo adicional?",
+      "paragraphs": [
+        "Si su empresa está ubicada dentro del Gran Mendoza, este servicio se realizará sin costo adicional.",
+        "En caso de encontrarse fuera del Gran Mendoza, puede enviar la membrana que requiere reemplazo a las instalaciones de Fateplas para su relevamiento; la logística del envío será a costo y cargo del cliente. Alternativamente, puede optar por el servicio de medición in situ, en tal caso se cotizarán los gastos de traslado del personal a la planta del cliente."
+      ],
+      "list": []
+    },
+    {
+      "title": "¿La tela de la membrana es apta para alimentos?",
+      "paragraphs": [
+        "La membrana es de calidad alimentaria aprobado por el Centro de Investigaciones Toxicológicas S.A. y cumple las condiciones establecidas por la resolución del Mercosur GMC Nº 32/10: “Reglamento técnico Mercosur sobre migración en materiales, envases y equipamientos plásticos destinados a estar en contacto con alimentos”."
+      ],
+      "list": []
+    },
+    {
+      "title": "¿Tienen garantía?",
+      "paragraphs": [
+        "Cuenta con una garantía de 1 AÑO.",
+        "La garantía cubre fallas de fabricación o de material. Si la membrana sufre algún daño se le pide al cliente fotos de las partes dañadas o con rotura de la membrana (video, fotografía o visita del fabricante). A partir de la evidencia Fateplas realiza una evaluación técnica para determinar si la falla proviene de un error de fabricación o de material. Si se demuestra que el daño es causado por un incumplimiento de las instrucciones de uso y mantenimiento (incluidas en un manual al momento de la entrega del producto) no corresponde la aplicación de la garantía.",
+        "La garantía tiene una vigencia de 1 AÑO a partir del momento de entrega del producto; e implica, por parte del proveedor, una reparación de la membrana."
+      ],
+      "list": []
+    },
+    {
+      "title": "¿Cuáles son los medios de pago disponibles?",
+      "paragraphs": ["Los medios de pago aceptados son:"],
+      "list": [
+        "Cheques o e-check del cliente (no se aceptan cheques de terceros), con un cobro máximo de 30 días.",
+        "Transferencia bancaria.",
+        "Efectivo."
+      ]
+    },
+    {
+      "title": "¿Cuál es la modalidad y plazo de pago?",
+      "paragraphs": [
+        "Para iniciar la fabricación de la membrana el producto debe estar señado (50% del monto total) y luego, previo a la entrega del producto, se cancela la compra."
+      ],
+      "list": []
+    }
+  ]
+}
