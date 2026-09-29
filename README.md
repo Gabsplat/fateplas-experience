@@ -69,6 +69,6 @@ La revisión toma como referencia [Vercel React Best Practices](https://github.c
 
 ## Diseño e interacción
 
-La membrana es un SVG vectorial propio de tres capas. Motion explica la selección del material y suaviza la apertura de acordeones y el cambio de fotografías. Las acciones de teclado responden sin espera y las preferencias de movimiento reducido eliminan desplazamientos. Las fotos y los carruseles tienen controles de pausa.
+La membrana conserva el modelo del SVG de WordPress, que incluye una imagen raster con el corte y el tejido originales. La imagen se mantiene completa e inmóvil; zonas SVG superpuestas resaltan sus materiales al explorarlos. Motion explica la selección del material y suaviza la apertura de acordeones y el cambio de fotografías. Las acciones de teclado responden sin espera y las preferencias de movimiento reducido eliminan desplazamientos. La capa seleccionada se explica con una etiqueta técnica conectada al modelo. Los carruseles permiten navegar con flechas, teclado y gestos; el de prensas también incluye selección numerada. No se muestran controles de pausa.
 
 Las decisiones de diseño y movimiento usan las [skills de Emil Kowalski](https://github.com/emilkowalski/skills) y [frontend-design de Anthropic](https://github.com/anthropics/skills/tree/main/skills/frontend-design), descubiertas con find-skills. Las fuentes instaladas se registran en `skills-lock.json`.

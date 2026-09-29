@@ -5,6 +5,21 @@ test("product carousel wraps in both directions and remains usable", async ({
 }) => {
   await page.goto("/");
   const products = page.getByRole("region", { name: "Modelos de prensas" });
+  const bucher = products.getByRole("button", {
+    name: "Ver modelo 3: Prensa Bucher XPert",
+    exact: true,
+  });
+  await bucher.click();
+  await expect(bucher).toHaveAttribute("aria-current", "true");
+  await expect(products.locator(".carousel-caption")).toHaveText(
+    "Prensa Bucher XPert",
+  );
+  await products
+    .getByRole("button", {
+      name: "Ver modelo 1: Prensa Della Toffola",
+      exact: true,
+    })
+    .click();
   await products.focus();
   const activeImage = products.locator(
     '.carousel-slide[aria-hidden="false"] img',

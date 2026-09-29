@@ -3,7 +3,6 @@
 import { useReducedMotionPreference } from "@/lib/use-reduced-motion";
 
 import Image from "next/image";
-import OriginalIcon from "@/components/OriginalIcon";
 import { useEffect, useRef, useState } from "react";
 
 type Slide = { src: string; alt: string; width: number; height: number };
@@ -22,16 +21,15 @@ export default function Carousel({
   const [focused, setFocused] = useState(false);
   const [interacted, setInteracted] = useState(false);
   const [instant, setInstant] = useState(false);
-  const [userPaused, setUserPaused] = useState(false);
   const reducedMotion = useReducedMotionPreference();
   useEffect(() => {
-    if (hovered || focused || userPaused || interacted || reducedMotion) return;
+    if (hovered || focused || interacted || reducedMotion) return;
     const timer = window.setInterval(
       () => setIndex((previous) => previous + 1),
       5000,
     );
     return () => window.clearInterval(timer);
-  }, [hovered, focused, userPaused, interacted, reducedMotion, slides.length]);
+  }, [hovered, focused, interacted, reducedMotion, slides.length]);
   useEffect(() => {
     if (!resetting) return;
     let secondFrame = 0;
@@ -60,6 +58,7 @@ export default function Carousel({
       setIndex((previous) => (previous + slides.length) % slides.length);
     }
   };
+  const current = (index + slides.length) % slides.length;
   return (
     <div
       className={`carousel carousel-${kind}`}
@@ -99,6 +98,15 @@ export default function Carousel({
           setFocused(false);
       }}
     >
+      {kind === "products" && (
+        <div className="carousel-technical-header" aria-hidden="true">
+          <span>Modelos compatibles</span>
+          <span>
+            {String(current + 1).padStart(2, "0")} /{" "}
+            {String(slides.length).padStart(2, "0")}
+          </span>
+        </div>
+      )}
       <div className="carousel-window">
         <div
           className={`carousel-track${resetting ? " is-resetting" : ""}`}
@@ -144,6 +152,15 @@ export default function Carousel({
         </div>
       </div>
       <div className="carousel-controls">
+        {kind === "products" && (
+          <p
+            className="carousel-caption"
+            aria-live={interacted ? "polite" : "off"}
+            aria-atomic="true"
+          >
+            {slides[current].alt}
+          </p>
+        )}
         <button
           type="button"
           className="carousel-arrow previous"
@@ -152,41 +169,66 @@ export default function Carousel({
           }
           onClick={(event) => move(-1, event.detail === 0)}
         >
-          <OriginalIcon name="caret-left" width={12} height={25} />
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M19 12H5m5-5-5 5 5 5"
+              stroke="currentColor"
+              strokeWidth="1.25"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
-        {kind === "products" ? (
-          <p className="carousel-caption">
-            {slides[(index + slides.length) % slides.length].alt}
-            <span className="carousel-counter">
-              {((index + slides.length) % slides.length) + 1} / {slides.length}
-            </span>
-          </p>
-        ) : null}
         <button
           type="button"
           className="carousel-arrow next"
           aria-label={kind === "logos" ? "Más clientes" : "Prensa siguiente"}
           onClick={(event) => move(1, event.detail === 0)}
         >
-          <OriginalIcon name="caret-right" width={12} height={25} />
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M5 12h14m-5-5 5 5-5 5"
+              stroke="currentColor"
+              strokeWidth="1.25"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
       </div>
-      {!reducedMotion ? (
-        <button
-          type="button"
-          className="carousel-playback"
-          onClick={() => {
-            if (userPaused || interacted) {
-              setUserPaused(false);
-              setInteracted(false);
-              setInstant(false);
-            } else setUserPaused(true);
-          }}
-          aria-label={`${userPaused || interacted ? "Reanudar" : "Pausar"} carrusel de ${kind === "logos" ? "clientes" : "prensas"}`}
-        >
-          {userPaused || interacted ? "Reanudar" : "Pausar"}
-        </button>
-      ) : null}
+      {kind === "products" && (
+        <div className="carousel-pagination" aria-label="Elegir modelo">
+          {slides.map((slide, slideIndex) => (
+            <button
+              key={`${slide.src}-${slideIndex}`}
+              type="button"
+              aria-label={`Ver modelo ${slideIndex + 1}: ${slide.alt}`}
+              aria-current={current === slideIndex ? "true" : undefined}
+              onClick={(event) => {
+                setInteracted(true);
+                setInstant(reducedMotion || event.detail === 0);
+                setIndex(slideIndex);
+              }}
+            >
+              <span aria-hidden="true">
+                {String(slideIndex + 1).padStart(2, "0")}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

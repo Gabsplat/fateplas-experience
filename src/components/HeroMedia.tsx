@@ -74,18 +74,6 @@ export default function HeroMedia() {
         <span className={styles.counter} aria-hidden="true">
           {index + 1} / {photos.length}
         </span>
-        {!reducedMotion ? (
-          <button
-            type="button"
-            onClick={() => {
-              setPaused(!paused);
-              setInstant(false);
-            }}
-            aria-label={paused ? "Reanudar imágenes" : "Pausar imágenes"}
-          >
-            {paused ? "Reanudar" : "Pausar"}
-          </button>
-        ) : null}
         <button
           type="button"
           aria-label="Siguiente imagen industrial"

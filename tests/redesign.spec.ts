@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("vector membrane keeps the latest selection during rapid interactions", async ({
+test("original membrane keeps its geometry and the latest selection during interaction", async ({
   page,
 }) => {
   await page.goto("/");
@@ -12,6 +12,12 @@ test("vector membrane keeps the latest selection during rapid interactions", asy
     name: "Ver soporte de poliéster",
     exact: true,
   });
+  await expect(
+    page.getByRole("button", {
+      name: "Ver cubierta de poliéster",
+      exact: true,
+    }),
+  ).toHaveAttribute("aria-pressed", "true");
   await matrix.scrollIntoViewIfNeeded();
   await matrix.click();
   await support.click();
@@ -24,15 +30,36 @@ test("vector membrane keeps the latest selection during rapid interactions", asy
   await expect(panel.getByRole("heading")).toHaveText("Matriz de PVC");
   await expect(page.locator("[data-material-layer]")).toHaveCount(3);
   await expect(
-    page.getByRole("img", { name: /Capas de la tela/ }).locator("image"),
-  ).toHaveCount(0);
+    page
+      .getByRole("group", {
+        name: "Capas de la tela de la membrana",
+        exact: true,
+      })
+      .locator("image"),
+  ).toHaveCount(1);
   await expect
     .poll(() =>
       page
         .locator('[data-material-layer="1"]')
         .evaluate((node) => getComputedStyle(node).transform),
     )
-    .toBe("matrix(1, 0, 0, 1, 0, -12)");
+    .toBe("none");
+  await page
+    .getByRole("button", { name: "Volver a cubierta", exact: true })
+    .click();
+  await expect(matrix).toHaveAttribute("aria-pressed", "false");
+  await expect(
+    page.getByRole("heading", { name: "Cubierta de poliéster", exact: true }),
+  ).toBeVisible();
+  await expect
+    .poll(() =>
+      page
+        .locator("[data-material-layer]")
+        .evaluateAll((nodes) =>
+          nodes.every((node) => getComputedStyle(node).transform === "none"),
+        ),
+    )
+    .toBe(true);
 });
 
 test("reduced motion keeps membrane selection immediate and exposes no autoplay controls", async ({
@@ -64,22 +91,21 @@ test("reduced motion keeps membrane selection immediate and exposes no autoplay 
   await expect(page.getByRole("button", { name: /^Pausar/ })).toHaveCount(0);
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await expect(
-    page.getByRole("button", { name: "Pausar imágenes", exact: true }),
-  ).toBeVisible();
+    page.getByRole("button", { name: /Pausar|Reanudar/ }),
+  ).toHaveCount(0);
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(page.getByRole("button", { name: /^Pausar/ })).toHaveCount(0);
   expect(errors).toEqual([]);
 });
 
-test("hero slideshow pauses and can be advanced explicitly", async ({
+test("hero slideshow can be advanced without playback controls", async ({
   page,
 }) => {
   await page.goto("/");
   const hero = page.getByRole("region", { name: "Imágenes de la industria" });
-  await hero.getByRole("button", { name: "Pausar imágenes" }).click();
   await expect(
-    hero.getByRole("button", { name: "Reanudar imágenes" }),
-  ).toBeVisible();
+    page.getByRole("button", { name: /Pausar|Reanudar/ }),
+  ).toHaveCount(0);
   const first = await hero.getByRole("img").getAttribute("alt");
   await hero
     .getByRole("button", { name: "Siguiente imagen industrial" })

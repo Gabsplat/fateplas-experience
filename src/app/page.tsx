@@ -255,6 +255,7 @@ export default function Home() {
           </div>
         </section>
         <section
+          id="materiales"
           className="materials section-padding"
           aria-labelledby="materials-title"
         >
@@ -449,11 +450,11 @@ export default function Home() {
             <div className="benefits-heading">
               <h2 id="benefits-title">Seguridad, rapidez y ahorro.</h2>
               <Image
-                src={withBasePath("/images/image14-300x81.png")}
-                width={300}
-                height={81}
+                src={withBasePath("/images/seguridad-rapidez-ahorro.png")}
+                width={2155}
+                height={730}
                 alt="Seguridad, rapidez y ahorro"
-                sizes="240px"
+                sizes="(max-width: 768px) 220px, 240px"
               />
             </div>
             <div className="benefits-copy">
