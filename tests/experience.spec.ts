@@ -24,9 +24,15 @@ test("material, press selection and quote work without overwriting a draft", asy
   await page.screenshot({
     path: `docs/reference/experience/hero-${testInfo.project.name}.png`,
   });
-  await page.getByRole("button", { name: "Matriz", exact: true }).click();
+  await page
+    .locator(".material-info")
+    .getByRole("button", { name: "Matriz", exact: true })
+    .click();
   await expect(page.getByText("7,8 MPa", { exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Soporte", exact: true }).click();
+  await page
+    .locator(".material-info")
+    .getByRole("button", { name: "Soporte", exact: true })
+    .click();
   await expect(page.getByText("1100 dTex", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Diemme", exact: true }).click();
   await expect(
@@ -48,7 +54,9 @@ test("material, press selection and quote work without overwriting a draft", asy
   await page
     .getByRole("button", { name: "Enviar mensaje", exact: true })
     .click();
-  await expect(page.getByRole("status")).toContainText("Vista previa");
+  await expect(page.locator(".contact-form").getByRole("status")).toContainText(
+    "Vista previa",
+  );
   await page.getByRole("button", { name: "¿Qué incluye el servicio?" }).click();
   await expect(page.locator("#faq-answer-0")).toBeVisible();
   expect(
@@ -113,7 +121,9 @@ test("reduced motion keeps content and keyboard interactions accessible", async 
   await expect
     .poll(() => page.locator(".experience").getAttribute("data-paused"))
     .toBe("true");
-  const layer = page.getByRole("button", { name: "Matriz", exact: true });
+  const layer = page
+    .locator(".material-info")
+    .getByRole("button", { name: "Matriz", exact: true });
   await layer.focus();
   await page.keyboard.press("Enter");
   await expect(page.getByText("7,8 MPa", { exact: true })).toBeVisible();

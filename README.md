@@ -2,21 +2,23 @@
 
 ## Variante de materiales y movimiento
 
-Rama `experience-material`, creada desde `redesign-industrial` en un worktree separado, `/home/gabsplat/Programming/Fateplas/web-experience`. La copia de `../web` conserva su rama y sus archivos. Esta variante no se publicó en GitHub.
+Rama `experience-material`, creada desde `redesign-industrial` en un worktree separado, `/home/gabsplat/Programming/Fateplas/web-experience`. La copia de `../web` conserva su rama y sus archivos. Esta variante se publica en [GitHub Pages, /fateplas-experience/](https://gabsplat.github.io/fateplas-experience/), desde el repositorio independiente [Gabsplat/fateplas-experience](https://github.com/Gabsplat/fateplas-experience).
 
 Vista local: [Omarchy, puerto 22443](https://omarchy.tailff08b5.ts.net:22443/). El servicio temporal `fateplas-experience-preview.service` sirve `out/` en `127.0.0.1:4324`. El servicio dura hasta que se detenga o se reinicie la máquina. El formulario de esta vista es un placeholder, sin envío ni persistencia.
 
-El hero presenta un estudio conceptual de material flexible, construido con geometría SVG proyectada, luces y trama de poliéster. Las capas se ensamblan y se abren en un ciclo de 12 segundos. La interacción con el puntero usa un resorte; el objeto se detiene fuera de pantalla, al ocultar la pestaña y al activar movimiento reducido. No se agregó una biblioteca 3D. El diagrama técnico original sigue completo e inmóvil en la sección de materiales.
+El hero presenta un estudio conceptual de material flexible con WebGPU y [vgpu 0.5 de Vercel Labs](https://github.com/vercel-labs/vgpu). Sus shaders WGSL producen cuatro efectos: luz rasante con el cursor, relieve y microsombras del tejido, láminas flexibles que se ensamblan y separan, y un barrido bordó al seleccionar una capa. Cubierta, Matriz y Soporte corresponden a poliéster, PVC y poliéster tejido. La escena usa geometría teselada, profundidad y MSAA4; se carga cuando entra en pantalla y limita la densidad a 1,5. Las dependencias de esta copia están instaladas por separado.
+
+El ciclo dura 12 segundos y el cursor usa un resorte. El renderer se detiene fuera de pantalla, al ocultar la pestaña y al pausar; con movimiento reducido presenta una vista estática abierta. La selección por teclado es inmediata. Si WebGPU no está disponible o falla el dispositivo, se muestra la escena SVG. El diagrama técnico original sigue completo e inmóvil en la sección de materiales.
 
 El film local de 12 segundos anima tres fotografías ya presentes en el proyecto, con una banda sonora sintetizada y silenciada por defecto. No es una filmación de la planta de Fateplas. Se puede regenerar con `python scripts/make-material-film.py`, que requiere ffmpeg. El MP4 pesa aproximadamente 1,6 MB. El selector prepara la consulta con la marca y el modelo, y conserva un mensaje o nombre que el visitante ya haya escrito.
 
 Referencias de diseño: [Hardware Operations](https://hardwareoperations.com/) y [Teenage Engineering](https://teenage.engineering/). Movimiento basado en [Good vs Great Animations de Emil Kowalski](https://emilkowal.ski/ui/good-vs-great-animations), las skills locales de Emil y la documentación de Motion.
 
-Para compilar y comprobar esta variante con las dependencias compartidas:
+Para compilar y comprobar esta variante:
 
 ```sh
 FATEPLAS_PROJECT_ROOT=/home/gabsplat/Programming/Fateplas PAGES_BASE_PATH='' node scripts/build-pages.mjs
-TEST_BASE_URL=http://127.0.0.1:4324 CHROMIUM_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test tests/experience.spec.ts
+TEST_BASE_URL=http://127.0.0.1:4324 CHROMIUM_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test tests/experience.spec.ts tests/membrane.spec.ts
 ```
 
 Para detener solo esta vista:

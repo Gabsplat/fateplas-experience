@@ -411,6 +411,9 @@ export default function Experience() {
   const [paused, setPaused] = useState(false);
   const [muted, setMuted] = useState(true);
   const [heroView, setHeroView] = useState<"material" | "film">("material");
+  const [heroActiveLayer, setHeroActiveLayer] = useState(0);
+  const [inspectionKey, setInspectionKey] = useState(0);
+  const [inspectionInstant, setInspectionInstant] = useState(false);
   const [suggestedMessage, setSuggestedMessage] = useState("");
   const [filmOpen, setFilmOpen] = useState(false);
   const [filmPaused, setFilmPaused] = useState(false);
@@ -456,6 +459,11 @@ export default function Experience() {
   const closeFilm = () => {
     dialog.current?.close();
     setFilmOpen(false);
+  };
+  const inspectLayer = (index: number, keyboard: boolean) => {
+    setHeroActiveLayer(index);
+    setInspectionInstant(keyboard || still);
+    setInspectionKey((key) => key + 1);
   };
 
   return (
@@ -525,73 +533,120 @@ export default function Experience() {
                 </button>
               </div>
             </div>
-            <div className="hero-stage">
-              <div className="hero-visual" data-view={heroView}>
-                {heroView === "material" ? (
-                  <MembraneScene paused={still || filmOpen} />
-                ) : (
-                  <Film
-                    paused={still || filmOpen}
-                    muted={muted}
-                    className="hero-film"
-                  />
-                )}
-              </div>
-              <div className="hero-stage-top">
-                <span className="live-mark">
-                  <i />
-                  {heroView === "material"
-                    ? "El material, de cerca"
-                    : "Industria en movimiento"}
-                </span>
-                <button
-                  type="button"
-                  className="round-control"
-                  aria-label={
-                    paused ? "Reanudar animaciones" : "Pausar animaciones"
-                  }
-                  aria-pressed={paused}
-                  onClick={() => setPaused(!paused)}
-                >
-                  {paused ? "▷" : "Ⅱ"}
-                </button>
-              </div>
-              <div className="hero-stage-bottom">
+            <div className="hero-media">
+              <div className="hero-stage">
                 <div
-                  className="view-switch"
-                  role="group"
-                  aria-label="Vista del hero"
+                  className="hero-visual"
+                  id="hero-material-scene"
+                  data-view={heroView}
                 >
+                  {heroView === "material" ? (
+                    <MembraneScene
+                      paused={still || filmOpen}
+                      activeLayer={heroActiveLayer}
+                      inspectionKey={inspectionKey}
+                      inspectionInstant={inspectionInstant}
+                    />
+                  ) : (
+                    <Film
+                      paused={still || filmOpen}
+                      muted={muted}
+                      className="hero-film"
+                    />
+                  )}
+                </div>
+                <div className="hero-stage-top">
+                  <span className="live-mark">
+                    <i />
+                    {heroView === "material"
+                      ? "El material, de cerca"
+                      : "Industria en movimiento"}
+                  </span>
                   <button
                     type="button"
-                    aria-pressed={heroView === "material"}
-                    onClick={() => setHeroView("material")}
+                    className="round-control"
+                    aria-label={
+                      paused ? "Reanudar animaciones" : "Pausar animaciones"
+                    }
+                    aria-pressed={paused}
+                    onClick={() => setPaused(!paused)}
                   >
-                    Material
-                  </button>
-                  <button
-                    type="button"
-                    aria-pressed={heroView === "film"}
-                    onClick={() => setHeroView("film")}
-                  >
-                    Industria
+                    {paused ? "▷" : "Ⅱ"}
                   </button>
                 </div>
-                {heroView === "film" ? (
-                  <button
-                    type="button"
-                    className="sound-control"
-                    aria-pressed={!muted}
-                    onClick={() => setMuted(!muted)}
+                <div className="hero-stage-bottom">
+                  <div
+                    className="view-switch"
+                    role="group"
+                    aria-label="Vista del hero"
                   >
-                    {muted ? "Activar sonido" : "Silenciar"}
-                  </button>
-                ) : (
-                  <span className="scene-hint">
-                    Mueva el cursor para explorar
-                  </span>
-                )}
+                    <button
+                      type="button"
+                      aria-pressed={heroView === "material"}
+                      onClick={() => setHeroView("material")}
+                    >
+                      Material
+                    </button>
+                    <button
+                      type="button"
+                      aria-pressed={heroView === "film"}
+                      onClick={() => setHeroView("film")}
+                    >
+                      Industria
+                    </button>
+                  </div>
+                  {heroView === "film" ? (
+                    <button
+                      type="button"
+                      className="sound-control"
+                      aria-pressed={!muted}
+                      onClick={() => setMuted(!muted)}
+                    >
+                      {muted ? "Activar sonido" : "Silenciar"}
+                    </button>
+                  ) : (
+                    <span className="scene-hint">
+                      Mueva el cursor para explorar
+                    </span>
+                  )}
+                </div>
               </div>
+              {heroView === "material" && (
+                <div
+                  className="hero-inspection"
+                  data-instant={inspectionInstant}
+                >
+                  <div className="hero-inspection-caption">
+                    <span>Explore una capa</span>
+                    <span aria-live={inspectionKey > 0 ? "polite" : "off"}>
+                      <span className="sr-only">
+                        {layers[heroActiveLayer].name}:{" "}
+                      </span>
+                      {layers[heroActiveLayer].material}
+                    </span>
+                  </div>
+                  <div
+                    className="hero-layer-controls"
+                    role="group"
+                    aria-label="Explorar las capas del material"
+                  >
+                    {layers.map((layer, index) => (
+                      <button
+                        type="button"
+                        key={layer.name}
+                        aria-pressed={heroActiveLayer === index}
+                        aria-controls="hero-material-scene"
+                        onClick={(event) =>
+                          inspectLayer(index, event.detail === 0)
+                        }
+                      >
+                        <span aria-hidden="true">0{index + 1}</span>
+                        {layer.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div className="hero-foot">

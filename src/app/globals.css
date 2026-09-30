@@ -305,6 +305,9 @@ button {
   font-size: 12px;
   color: var(--text);
 }
+.hero-media {
+  min-width: 0;
+}
 .hero-stage {
   position: relative;
   aspect-ratio: 1.08;
@@ -414,6 +417,55 @@ button {
 .scene-hint {
   font-size: 11px;
   color: var(--text);
+}
+.hero-inspection {
+  padding-top: 14px;
+}
+.hero-inspection-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  color: var(--text);
+}
+.hero-inspection-caption > span:last-child {
+  text-align: right;
+}
+.hero-layer-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.hero-layer-controls button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  background: transparent;
+  font-size: 12px;
+}
+.hero-layer-controls button > span {
+  font-size: 10px;
+  color: var(--text);
+}
+.hero-layer-controls button[aria-pressed="true"] {
+  background: var(--pink-light);
+  border-color: #cfaabb;
+  color: var(--pink-dark);
+}
+.hero-layer-controls button[aria-pressed="true"] > span {
+  color: var(--pink-dark);
+}
+.hero-inspection[data-instant="true"] button,
+.hero-layer-controls button:focus-visible {
+  transition: none;
+}
+.hero-layer-controls button:focus-visible:active {
+  transform: none;
 }
 .sound-control {
   border: 0;
@@ -1273,6 +1325,10 @@ button {
   .round-control:hover {
     background: #ffffff50;
   }
+  .hero-layer-controls button:hover:not([aria-pressed="true"]) {
+    background: var(--mineral);
+    border-color: #aeb2ac;
+  }
 }
 @media (max-width: 1100px) {
   .hero-copy h1 {
@@ -1342,6 +1398,11 @@ button {
   }
   .live-mark {
     font-size: 10px;
+  }
+  .hero-layer-controls button {
+    gap: 6px;
+    padding-inline: 5px;
+    font-size: 11px;
   }
   .button {
     font-size: 13px;
