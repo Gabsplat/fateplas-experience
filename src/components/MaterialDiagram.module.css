@@ -1,16 +1,39 @@
 .diagram {
-  max-width: 880px;
-  margin: 55px auto 40px;
+  width: 100%;
+  max-width: 1120px;
+  margin: 54px auto 0;
   color: var(--ink);
 }
 .stage {
   position: relative;
+  padding: 34px 48px 22px;
+  border: 1px solid #d9dcd6;
+  border-radius: 8px;
+  background-color: #fafbf8;
+  background-image:
+    linear-gradient(#39473506 1px, transparent 1px),
+    linear-gradient(90deg, #39473506 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: #626862;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.scene {
+  position: relative;
+  margin-top: 158px;
 }
 .svg {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 620px;
   overflow: visible;
 }
 .layer {
@@ -29,179 +52,143 @@
 }
 .reset {
   position: absolute;
-  bottom: 18px;
+  bottom: 20px;
   right: 0;
   width: 44px;
   height: 44px;
   display: grid;
   place-items: center;
-  border: 1px solid var(--line);
+  border: 1px solid #c8cec5;
   border-radius: 50%;
-  background: white;
-  color: var(--text);
+  background: #fff;
+  color: #454a45;
   cursor: pointer;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms var(--ease-out);
 }
 .reset:disabled {
-  opacity: 0;
-  pointer-events: none;
+  opacity: 0.4;
+  cursor: default;
+}
+.reset:not(:disabled):active {
+  transform: scale(0.95);
 }
 .controls {
   display: flex;
   justify-content: center;
   gap: 8px;
+  margin-top: 20px;
 }
 .tab {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  min-height: 44px;
-  padding: 10px 18px;
+  gap: 12px;
+  min-height: 48px;
+  padding: 10px 24px;
   border: 1px solid transparent;
   background: transparent;
-  color: var(--text);
+  color: #515950;
   font-size: 15px;
-  border-radius: 28px;
+  border-radius: 4px;
   cursor: pointer;
   transition:
     background-color 160ms ease,
-    border-color 160ms ease;
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms var(--ease-out);
 }
 .tab[data-highlighted="true"] {
-  color: var(--ink);
-  background: var(--mineral);
-  border-color: var(--line);
+  color: #6f2443;
+  background: #f0e7eb;
+  border-color: #d8bec9;
 }
-.swatch {
-  width: 8px;
-  height: 8px;
+.tab:active {
+  transform: translateY(1px);
+}
+.number {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid currentColor;
   border-radius: 50%;
-  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
 }
 .description {
   position: absolute;
-  left: calc(var(--anchor-x) - 3.2%);
+  z-index: 1;
+  left: calc(var(--anchor-x) - 4.228%);
   top: calc(var(--anchor-y) - 16.667%);
-  width: 350px;
-  transform: translate(-80%, -100%);
+  width: 320px;
+  transform: translate(-100%, -100%);
   pointer-events: none;
 }
 .card {
   display: flex;
-  border: 1px solid var(--line);
-  border-left: 4px solid var(--pink);
-  border-radius: 3px;
-  background: #fcfcfc;
-  box-shadow: 0 2px 4px #26272a0a;
+  min-height: 192px;
+  border: 1px solid #d0d6cd;
+  border-left: 3px solid var(--pink);
+  border-radius: 4px;
+  background: #fff;
+  box-shadow:
+    0 8px 28px #2730220a,
+    0 1px 3px #27302208;
 }
 .index {
-  padding: 17px 12px;
-  border-right: 1px solid var(--line);
-  color: var(--pink);
-  font-size: 13px;
+  padding: 19px 12px;
+  border-right: 1px solid #e5e8e1;
+  color: #8b3055;
+  font-size: 11px;
   font-variant-numeric: tabular-nums;
 }
 .copy {
-  padding: 16px;
+  padding: 17px 18px 18px;
 }
 .description h3 {
-  margin: 0 0 5px;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.25;
+  margin: 0 0 10px;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+.fact {
+  display: block;
+  color: #78314d;
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+.caption {
+  display: block;
+  margin-top: 5px;
+  color: #62685f;
+  font-size: 11px;
+  line-height: 1.35;
 }
 .description p {
-  margin: 0;
-  color: var(--text);
-  font-size: 14px;
-  line-height: 1.5;
+  margin: 12px 0 0;
+  color: #4e554b;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.hint {
+  color: #62685f;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.4;
 }
 .mobileLeader {
   display: none;
 }
-@media (hover: hover) and (pointer: fine) {
-  .hotspot:hover .hotspotRing {
-    stroke-width: 3px;
-  }
-  .tab:hover {
-    background: var(--mineral);
-  }
-  .reset:not(:disabled):hover {
-    color: var(--pink);
-    border-color: var(--pink);
-  }
-}
-@media (max-width: 600px) {
-  .diagram {
-    margin-bottom: 24px;
-  }
-  .svg {
-    width: calc(100% + 24px);
-    max-width: none;
-    margin-inline: -12px;
-  }
-  .hotspot > circle:first-child {
-    r: 48px;
-  }
-  .controls {
-    gap: 2px;
-  }
-  .tab {
-    padding: 10px 11px;
-    gap: 7px;
-    font-size: 14px;
-  }
-  .stage {
-    display: flex;
-    flex-direction: column;
-  }
-  .description {
-    position: relative;
-    order: -1;
-    margin-bottom: 20px;
-    top: 0;
-    left: 0;
-    width: 100%;
-    transform: none;
-  }
-  .card {
-    min-height: 128px;
-  }
-  .description::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    bottom: auto;
-    left: calc(46.016% - 1px);
-    height: 20px;
-    border-left: 1px solid var(--pink);
-  }
-  .leader {
-    display: none;
-  }
-  .mobileLeader {
-    display: block;
-  }
-  .copy {
-    padding: 14px;
-  }
-  .description h3 {
-    font-size: 17px;
-  }
-  .reset {
-    bottom: 8px;
-    right: -4px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hotspotRing,
-  .tab {
-    transition: none;
-  }
-}
-
 .lightSweep {
-  animation: material-light 700ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation: material-light 650ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 @keyframes material-light {
   0% {
@@ -216,7 +203,139 @@
     opacity: 0;
   }
 }
+@media (hover: hover) and (pointer: fine) {
+  .hotspot:hover .hotspotRing {
+    stroke-width: 3px;
+  }
+  .tab:hover {
+    background: #edece6;
+  }
+  .tab[data-highlighted="true"]:hover {
+    background: #eadde3;
+  }
+  .reset:not(:disabled):hover {
+    color: var(--pink);
+    border-color: var(--pink);
+  }
+}
+@media (max-width: 900px) {
+  .stage {
+    padding-inline: 28px;
+  }
+  .description {
+    width: 288px;
+  }
+  .copy {
+    padding-inline: 14px;
+  }
+}
+@media (max-width: 700px) {
+  .diagram {
+    margin-top: 32px;
+  }
+  .stage {
+    padding: 20px 18px 20px;
+    background-size: 28px 28px;
+  }
+  .meta {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+  .scene {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+  }
+  .svg {
+    width: 100%;
+  }
+  .hotspot > circle:first-child {
+    r: 60px;
+  }
+  .controls {
+    gap: 2px;
+    margin-top: 14px;
+  }
+  .tab {
+    padding: 10px 12px;
+    gap: 8px;
+    font-size: 13px;
+  }
+  .number {
+    width: 22px;
+    height: 22px;
+  }
+  .description {
+    position: relative;
+    order: -1;
+    margin-bottom: 24px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 196px;
+    transform: none;
+  }
+  .card {
+    height: 196px;
+    min-height: 0;
+  }
+  .description::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: calc(46.016% - 1px);
+    height: 24px;
+    border-left: 1px solid var(--pink);
+  }
+  .leader {
+    display: none;
+  }
+  .mobileLeader {
+    display: block;
+  }
+  .copy {
+    padding: 18px;
+  }
+  .description h3 {
+    font-size: 17px;
+  }
+  .description p {
+    max-width: 310px;
+  }
+  .reset {
+    bottom: 8px;
+    right: 0;
+  }
+  .hint {
+    margin-top: 12px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 380px) {
+  .controls {
+    gap: 4px;
+  }
+  .tab {
+    padding-inline: 8px;
+    gap: 6px;
+    font-size: 12px;
+  }
+  .number {
+    width: 20px;
+    height: 20px;
+  }
+}
+.diagram[data-motion-paused="true"] .hotspotRing,
+.diagram[data-motion-paused="true"] .tab,
+.diagram[data-motion-paused="true"] .reset {
+  transition: none;
+}
 @media (prefers-reduced-motion: reduce) {
+  .hotspotRing,
+  .tab,
+  .reset {
+    transition: none;
+  }
   .lightSweep {
     display: none;
   }

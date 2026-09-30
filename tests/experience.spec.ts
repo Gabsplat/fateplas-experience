@@ -25,12 +25,12 @@ test("material, press selection and quote work without overwriting a draft", asy
     path: `docs/reference/experience/hero-${testInfo.project.name}.png`,
   });
   await page
-    .locator(".material-info")
+    .locator("#materiales")
     .getByRole("button", { name: "Matriz", exact: true })
     .click();
   await expect(page.getByText("7,8 MPa", { exact: true })).toBeVisible();
   await page
-    .locator(".material-info")
+    .locator("#materiales")
     .getByRole("button", { name: "Soporte", exact: true })
     .click();
   await expect(page.getByText("1100 dTex", { exact: true })).toBeVisible();
@@ -122,7 +122,7 @@ test("reduced motion keeps content and keyboard interactions accessible", async 
     .poll(() => page.locator(".experience").getAttribute("data-paused"))
     .toBe("true");
   const layer = page
-    .locator(".material-info")
+    .locator("#materiales")
     .getByRole("button", { name: "Matriz", exact: true });
   await layer.focus();
   await page.keyboard.press("Enter");

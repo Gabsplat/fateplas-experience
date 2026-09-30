@@ -8,7 +8,9 @@ Vista local: [Omarchy, puerto 22443](https://omarchy.tailff08b5.ts.net:22443/). 
 
 El hero presenta un estudio conceptual de material flexible con WebGPU y [vgpu 0.5 de Vercel Labs](https://github.com/vercel-labs/vgpu). Sus shaders WGSL producen cuatro efectos: luz rasante con el cursor, relieve y microsombras del tejido, láminas flexibles que se ensamblan y separan, y un barrido bordó al seleccionar una capa. Cubierta, Matriz y Soporte corresponden a poliéster, PVC y poliéster tejido. La escena usa geometría teselada, profundidad y MSAA4; se carga cuando entra en pantalla y limita la densidad a 1,5. Las dependencias de esta copia están instaladas por separado.
 
-El ciclo dura 12 segundos y el cursor usa un resorte. El renderer se detiene fuera de pantalla, al ocultar la pestaña y al pausar; con movimiento reducido presenta una vista estática abierta. La selección por teclado es inmediata. Si WebGPU no está disponible o falla el dispositivo, se muestra la escena SVG. El diagrama técnico original sigue completo e inmóvil en la sección de materiales.
+El ciclo dura 12 segundos y el cursor usa un resorte. El renderer se detiene fuera de pantalla, al ocultar la pestaña y al pausar; con movimiento reducido presenta una vista estática abierta. La selección por teclado es inmediata. Si WebGPU no está disponible o falla el dispositivo, se muestra la escena SVG.
+
+La sección "La diferencia está adentro" reutiliza el diagrama de la copia local del rediseño anterior, con una presentación técnica clara y una ficha conectada a la capa seleccionada. Se puede explorar desde las superficies del corte, sus puntos o la leyenda. La imagen original permanece completa e inmóvil; los resaltados y el barrido de luz son superposiciones SVG. La ficha muestra material, función y especificación, y ocupa un lugar fijo en móvil. Escape vuelve a la cubierta; teclado, pausa y movimiento reducido suprimen las animaciones.
 
 El film local de 12 segundos anima tres fotografías ya presentes en el proyecto, con una banda sonora sintetizada y silenciada por defecto. No es una filmación de la planta de Fateplas. Se puede regenerar con `python scripts/make-material-film.py`, que requiere ffmpeg. El MP4 pesa aproximadamente 1,6 MB. El selector prepara la consulta con la marca y el modelo, y conserva un mensaje o nombre que el visitante ya haya escrito.
 
@@ -18,7 +20,7 @@ Para compilar y comprobar esta variante:
 
 ```sh
 FATEPLAS_PROJECT_ROOT=/home/gabsplat/Programming/Fateplas PAGES_BASE_PATH='' node scripts/build-pages.mjs
-TEST_BASE_URL=http://127.0.0.1:4324 CHROMIUM_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test tests/experience.spec.ts tests/membrane.spec.ts
+TEST_BASE_URL=http://127.0.0.1:4324 CHROMIUM_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test tests/experience.spec.ts tests/membrane.spec.ts tests/material-diagram.spec.ts
 ```
 
 Para detener solo esta vista:

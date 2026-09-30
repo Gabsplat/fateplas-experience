@@ -12,42 +12,16 @@ import { useEffect, useRef, useState } from "react";
 import { withBasePath } from "@/lib/base-path";
 import { useReducedMotionPreference } from "@/lib/use-reduced-motion";
 import MembraneScene from "./MembraneScene";
+import MaterialDiagram from "./MaterialDiagram";
 import ContactForm from "./ContactForm";
 import Accordion from "./Accordion";
 import content from "./content.json";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 const layers = [
-  {
-    name: "Cubierta",
-    material: "Poliéster",
-    title: "El contacto con su producción.",
-    copy: "Cubierta de poliéster libre de ftalatos, preparada para trabajar en contacto con alimentos.",
-    fact: "60 °C",
-    caption: "Resistencia a la temperatura",
-    color: "#b64a73",
-    surface: "M41 180 309 25 476 122 343 199 309 180 175 257Z",
-  },
-  {
-    name: "Matriz",
-    material: "PVC",
-    title: "La presión queda adentro.",
-    copy: "Una matriz de PVC aporta hermeticidad y baja fluencia al conjunto de la membrana.",
-    fact: "7,8 MPa",
-    caption: "Resistencia hidrostática mínima",
-    color: "#7f8c97",
-    surface: "M343 215 476 138 578 196 443 273Z",
-  },
-  {
-    name: "Soporte",
-    material: "Poliéster tejido",
-    title: "La fuerza está en la trama.",
-    copy: "El tejido de poliéster sostiene la membrana frente a la tracción longitudinal y trapezoidal.",
-    fact: "1100 dTex",
-    caption: "Trama de fibra mínima",
-    color: "#c1c2a9",
-    surface: "M309 215 175 295 309 372 443 288Z",
-  },
+  { name: "Cubierta", material: "Poliéster" },
+  { name: "Matriz", material: "PVC" },
+  { name: "Soporte", material: "Poliéster tejido" },
 ];
 const machines = [
   {
@@ -155,151 +129,6 @@ function Film({
     >
       <source src={withBasePath("/media/material-film.mp4")} type="video/mp4" />
     </video>
-  );
-}
-
-function MaterialExplorer({ paused }: { paused: boolean }) {
-  const [active, setActive] = useState(0);
-  const [auto, setAuto] = useState(true);
-  const [instant, setInstant] = useState(false);
-  const reduced = useReducedMotionPreference();
-  const section = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (paused || reduced || !auto) return;
-    let timer: ReturnType<typeof setInterval> | undefined;
-    let visible = false;
-    const sync = () => {
-      clearInterval(timer);
-      if (visible && !document.hidden)
-        timer = setInterval(() => {
-          setInstant(false);
-          setActive((index) => (index + 1) % layers.length);
-        }, 4400);
-    };
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        visible = entry.isIntersecting;
-        sync();
-      },
-      { threshold: 0.35 },
-    );
-    if (section.current) observer.observe(section.current);
-    document.addEventListener("visibilitychange", sync);
-    return () => {
-      clearInterval(timer);
-      observer.disconnect();
-      document.removeEventListener("visibilitychange", sync);
-    };
-  }, [auto, paused, reduced]);
-  const current = layers[active];
-  const choose = (index: number, keyboard: boolean) => {
-    setActive(index);
-    setAuto(false);
-    setInstant(keyboard);
-  };
-  return (
-    <div ref={section} className="material-explorer">
-      <div className="material-stage">
-        <div className="material-grid" aria-hidden="true" />
-        <span className="stage-label">Sección de la membrana</span>
-        <svg
-          viewBox="0 0 615 405"
-          className="material-object"
-          role="img"
-          aria-label="Diagrama original de la membrana, con cubierta, matriz y soporte"
-        >
-          <image
-            href={withBasePath("/images/membrane-layers.png")}
-            width="615"
-            height="405"
-          />
-          {layers.map((layer, index) => (
-            <motion.path
-              key={layer.name}
-              d={layer.surface}
-              fill={layer.color}
-              stroke={layer.color}
-              strokeWidth="1.5"
-              initial={false}
-              animate={{ opacity: active === index ? 0.24 : 0 }}
-              transition={{ duration: reduced || instant ? 0 : 0.22, ease }}
-            />
-          ))}
-        </svg>
-        <div className="material-scale" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-        <p className="material-caption">
-          Seleccione una capa para explorar el material.
-        </p>
-      </div>
-      <div className="material-info">
-        <div
-          className="layer-tabs"
-          role="group"
-          aria-label="Capas de la membrana"
-        >
-          {layers.map((layer, index) => (
-            <button
-              type="button"
-              key={layer.name}
-              aria-pressed={active === index}
-              className={active === index ? "layer-tab selected" : "layer-tab"}
-              onClick={(event) => choose(index, event.detail === 0)}
-            >
-              <span className="layer-dot" style={{ background: layer.color }} />
-              {layer.name}
-              {active === index && (
-                <motion.span
-                  className="layer-underline"
-                  layoutId="layer-underline"
-                  transition={{ duration: reduced || instant ? 0 : 0.22, ease }}
-                />
-              )}
-            </button>
-          ))}
-        </div>
-        <div className="layer-description" aria-live={auto ? "off" : "polite"}>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={current.name}
-              initial={{
-                opacity: 0,
-                transform: reduced || instant ? "none" : "translateY(12px)",
-              }}
-              animate={{ opacity: 1, transform: "translateY(0px)" }}
-              exit={{
-                opacity: 0,
-                transform: reduced || instant ? "none" : "translateY(-6px)",
-              }}
-              transition={{ duration: reduced || instant ? 0 : 0.18, ease }}
-            >
-              <p className="material-name">{current.material}</p>
-              <h3>{current.title}</h3>
-              <p>{current.copy}</p>
-              <div className="material-fact">
-                <strong>{current.fact}</strong>
-                <span>{current.caption}</span>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-        <button
-          type="button"
-          className="subtle-control"
-          aria-pressed={auto}
-          onClick={() => setAuto(!auto)}
-        >
-          {auto ? "Pausar recorrido por capas" : "Recorrer las capas"}
-          <span aria-hidden="true">{auto ? "Ⅱ" : "▷"}</span>
-        </button>
-      </div>
-    </div>
   );
 }
 
@@ -687,11 +516,11 @@ export default function Experience() {
               está adentro.
             </h2>
             <div className="section-intro">
-              Tres capas que trabajan juntas. Explore qué aporta cada una a su
-              membrana.
+              El corte original, de cerca. Seleccione un punto para conocer el
+              material y la función de cada capa.
             </div>
           </div>
-          <MaterialExplorer paused={still} />
+          <MaterialDiagram paused={still} />
           <div className="certification">
             <Image
               src={withBasePath(
