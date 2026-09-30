@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { withBasePath } from "@/lib/base-path";
 import {
   CONTACT_LIMITS,
@@ -22,13 +22,30 @@ function createSubmissionId() {
   return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
 }
 
-export default function ContactForm() {
+export default function ContactForm({
+  suggestedMessage = "",
+}: {
+  suggestedMessage?: string;
+}) {
   const preview = process.env.NEXT_PUBLIC_CONTACT_MODE === "placeholder";
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [notice, setNotice] = useState("");
   const [errors, setErrors] = useState<ContactErrors>({});
   const sending = useRef(false);
   const submission = useRef<{ id: string; fields: string } | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const previousSuggestion = useRef("");
+  useEffect(() => {
+    const field = formRef.current?.elements.namedItem("message");
+    if (
+      field instanceof HTMLTextAreaElement &&
+      suggestedMessage &&
+      (!field.value || field.value === previousSuggestion.current)
+    ) {
+      field.value = suggestedMessage;
+      previousSuggestion.current = suggestedMessage;
+    }
+  }, [suggestedMessage]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -108,6 +125,7 @@ export default function ContactForm() {
 
   return (
     <form
+      ref={formRef}
       className="contact-form"
       method="post"
       action={preview ? "#contacto" : withBasePath("/api/contact")}
@@ -170,7 +188,7 @@ export default function ContactForm() {
       </div>
       <div className="contact-field">
         <label className="contact-label" htmlFor="contact-message">
-          Asunto{" "}
+          Mensaje{" "}
           <span className="contact-required" aria-hidden="true">
             *
           </span>

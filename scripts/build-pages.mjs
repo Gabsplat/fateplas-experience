@@ -44,7 +44,7 @@ const result = spawnSync(
     env: {
       ...process.env,
       FATEPLAS_STATIC_EXPORT: "true",
-      FATEPLAS_PROJECT_ROOT: root,
+      FATEPLAS_PROJECT_ROOT: process.env.FATEPLAS_PROJECT_ROOT || root,
       NEXT_PUBLIC_BASE_PATH: basePath,
       NEXT_PUBLIC_CONTACT_MODE: "placeholder",
       CONTACT_EMAIL_PROVIDER: "none",

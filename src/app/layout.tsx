@@ -17,7 +17,7 @@ const poppins = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Fateplas | Repuestos de membrana",
+  title: "Fateplas | Cada capa cuenta",
   description:
     "Seguridad, calidad y precio en sus repuestos de membrana. Membranas para prensas neumáticas, asesoramiento y atención personalizada.",
 };

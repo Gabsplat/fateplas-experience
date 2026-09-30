@@ -1,4 +1,4 @@
-node_modules/
+node_modules
 .next/
 out/
 .pages-build/
@@ -14,4 +14,4 @@ docs/skills/
 docs/local-preview.md
 
 # Agent skills are installed locally from skills-lock.json.
-.agents/
+.agents

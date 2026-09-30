@@ -1,4 +1,32 @@
-# Fateplas · Rediseño
+# Fateplas · Cada capa cuenta
+
+## Variante de materiales y movimiento
+
+Rama `experience-material`, creada desde `redesign-industrial` en un worktree separado, `/home/gabsplat/Programming/Fateplas/web-experience`. La copia de `../web` conserva su rama y sus archivos. Esta variante no se publicó en GitHub.
+
+Vista local: [Omarchy, puerto 22443](https://omarchy.tailff08b5.ts.net:22443/). El servicio temporal `fateplas-experience-preview.service` sirve `out/` en `127.0.0.1:4324`. El servicio dura hasta que se detenga o se reinicie la máquina. El formulario de esta vista es un placeholder, sin envío ni persistencia.
+
+El hero presenta un estudio conceptual de material flexible, construido con geometría SVG proyectada, luces y trama de poliéster. Las capas se ensamblan y se abren en un ciclo de 12 segundos. La interacción con el puntero usa un resorte; el objeto se detiene fuera de pantalla, al ocultar la pestaña y al activar movimiento reducido. No se agregó una biblioteca 3D. El diagrama técnico original sigue completo e inmóvil en la sección de materiales.
+
+El film local de 12 segundos anima tres fotografías ya presentes en el proyecto, con una banda sonora sintetizada y silenciada por defecto. No es una filmación de la planta de Fateplas. Se puede regenerar con `python scripts/make-material-film.py`, que requiere ffmpeg. El MP4 pesa aproximadamente 1,6 MB. El selector prepara la consulta con la marca y el modelo, y conserva un mensaje o nombre que el visitante ya haya escrito.
+
+Referencias de diseño: [Hardware Operations](https://hardwareoperations.com/) y [Teenage Engineering](https://teenage.engineering/). Movimiento basado en [Good vs Great Animations de Emil Kowalski](https://emilkowal.ski/ui/good-vs-great-animations), las skills locales de Emil y la documentación de Motion.
+
+Para compilar y comprobar esta variante con las dependencias compartidas:
+
+```sh
+FATEPLAS_PROJECT_ROOT=/home/gabsplat/Programming/Fateplas PAGES_BASE_PATH='' node scripts/build-pages.mjs
+TEST_BASE_URL=http://127.0.0.1:4324 CHROMIUM_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test tests/experience.spec.ts
+```
+
+Para detener solo esta vista:
+
+```sh
+systemctl --user stop fateplas-experience-preview.service
+tailscale serve --https=22443 off
+```
+
+## Antecedentes de la versión base
 
 Rediseño de la landing de Fateplas con Next.js App Router, React, TypeScript y Motion. Dirección industrial clara inspirada en Topsoe, conservando la identidad rosa y las mecánicas de la página original. Las imágenes y fuentes se sirven desde este proyecto.
 
